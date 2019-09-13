@@ -13,3 +13,11 @@ script:
   - docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic file.tex"
   # Compiling multiple files as well as using biber:
 #  - docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic --keep-intermediates --reruns 0 biber-mwe.tex; biber biber-mwe; tectonic biber-mwe.tex; tectonic file.tex"
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file: "file.pdf"
+  skip_cleanup: true
+  draft: true
+  tags: false
